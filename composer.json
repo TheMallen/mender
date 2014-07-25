@@ -2,6 +2,13 @@
     "name": "themallen/bender",
     "description": "Bender is a css/js minifier and combiner.",
     "require": {
-        "php": ">=5.3.0"
-    }
+        "php": ">=5.3.0",
+         "tedivm/jshrink": "~1.0",
+         "meenie/javascript-packer": "dev-master",
+         "natxet/CssMin": "dev-master"
+    },
+    "autoload" : {
+		"classmap": ["src/"]
+	},
+	"license": "MIT"
 }
