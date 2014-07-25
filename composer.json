@@ -1,5 +1,5 @@
 {
-    "name": "esiteq/bender",
+    "name": "themallen/bender",
     "description": "Bender is a css/js minifier and combiner.",
     "require": {
         "php": ">=5.3.0"
