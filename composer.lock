@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "da89e94f233d819ed19490bb285eb950",
+    "hash": "c83e8725f58c616dea7d509f942444ab",
     "packages": [
         {
             "name": "meenie/javascript-packer",

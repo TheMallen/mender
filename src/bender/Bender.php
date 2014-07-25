@@ -1,49 +1,52 @@
 <?php
-
 /**
  * @author Alex Raven
  * @company ESITEQ
  * @website http://www.esiteq.com/
  * @email bugrov at gmail.com
  * @created 29.10.2013
- * @version 0.3
+ * @version 0.2
  * improved by Rolland (rolland at alterego.biz.ua)
- * improved by Mallen (mathew.w.allen @ gmail.com)
  */
-
+namespace bender;
 class Bender
 {
     // CSS minifier
-    public $cssmin = "cssmin";
+    public $cssmin;
     // JS minifier, can be "packer" or "jshrink"
-    public $jsmin = "packer";
+    public $jsmin;
     // Packed file time to live in sec (-1 = never recompile, 0 = always recompile, default: 3600)
-    public $ttl = 3600;
+    public $ttl;
     // Project's root dir
     public $root_dir;
     // Constructor
     private $version_key = 'v';
-    public function __construct()
+    protected $javascript = array();
+    protected $stylesheets = array();
+
+    public function __construct($config = array())
     {
+        $this->ttl = $config['ttl'] ?: 0;
+        $this->cssmin  = $config['cssmin'] ?: 'cssmin';
+        $this->jsmin = $config['jsmin'] ?: 'packer';
         $this->root_dir = defined( 'ROOT_DIR' ) ? ROOT_DIR : $_SERVER['DOCUMENT_ROOT'];
     }
     // Enqueue CSS or Javascript
-    public function enqueue( $src )
+    public function enqueue( $filepath )
     {
-        global $_javascripts, $_stylesheets;
-        if ( !is_array( $src ) )
+        if ( !is_array( $filepath ) )
         {
-            $src = array( $src );
+            $filepath = array( $filepath );
         }
-        foreach ( $src as $s )
+        foreach ( $filepath as $file )
         {
-            switch ( $this->get_ext( $s ) )
+            switch ( $this->get_ext( $file ) )
             {
                 case "css":
-                    $_stylesheets[] = $s;
+                    $this->stylesheets[] = $file;
                     break;
                 case "js":
-                    $_javascripts[] = $s;
+                    $this->javascript[] = $file;
                     break;
             }
         }
@@ -73,8 +76,7 @@ class Bender
                 switch ( $this->cssmin )
                 {
                     case "cssmin":
-                        require_once realpath( dirname( __file__ ) . "/cssmin.php" );
-                        $packed = CssMin::minify( $str );
+                        $packed = \CssMin::minify( $str );
                         break;
                     default:
                         $packed = $str;
@@ -84,13 +86,11 @@ class Bender
                 switch ( $this->jsmin )
                 {
                     case "packer":
-                        require_once realpath( dirname( __file__ ) ) . "/class.JavaScriptPacker.php";
-                        $packer = new JavaScriptPacker( $str, "Normal", true, false );
+                        $packer = new \JavaScriptPacker( $str, "Normal", true, false );
                         $packed = $packer->pack();
                         break;
                     case "jshrink":
-                        require_once realpath( dirname( __file__ ) ) . "/JShrink.class.php";
-                        $packed = Minifier::minify( $str );
+                        $packed = \JShrink\Minifier::minify( $str );
                         break;
                     default:
                         $packed = $str;
@@ -103,17 +103,16 @@ class Bender
     public function output( $output )
     {
         $output = ltrim( $output, './' );
-        global $_javascripts, $_stylesheets;
         switch ( $this->get_ext( $output ) )
         {
             case "css":
-                $this->check_recombine( $output, $_stylesheets );
-                $this->minify( $_stylesheets, "css", $output );
+                $this->check_recombine( $output, $this->stylesheets );
+                $this->minify( $this->stylesheets, "css", $output );
                 return '<link href="' . $this->get_src( $output ) . '" rel="stylesheet" type="text/css"/>';
                 break;
             case "js":
-                $this->check_recombine( $output, $_javascripts );
-                $this->minify( $_javascripts, "js", $output );
+                $this->check_recombine( $output, $this->javascript );
+                $this->minify( $this->javascript, "js", $output );
                 return '<script type="text/javascript" src="' . $this->get_src( $output ) . '"></script>';
                 break;
         }
@@ -182,4 +181,3 @@ class Bender
     }
 
 }
-?>
