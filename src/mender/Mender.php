@@ -8,8 +8,8 @@
  * @version 0.2
  * improved by Rolland (rolland at alterego.biz.ua)
  */
-namespace bender;
-class Bender
+namespace mender;
+class Mender
 {
     // CSS minifier
     public $cssmin;

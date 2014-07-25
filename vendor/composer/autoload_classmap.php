@@ -74,5 +74,5 @@ return array(
     'aCssRulesetEndToken' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
     'aCssRulesetStartToken' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
     'aCssToken' => $vendorDir . '/natxet/CssMin/src/CssMin.php',
-    'bender\\Bender' => $baseDir . '/src/bender/Bender.php',
+    'mender\\Mender' => $baseDir . '/src/mender/Mender.php',
 );

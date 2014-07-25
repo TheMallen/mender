@@ -1,6 +1,6 @@
 {
-    "name": "themallen/bender",
-    "description": "Bender is a css/js minifier and combiner.",
+    "name": "themallen/mender",
+    "description": "Mender is a css/js minifier and combiner.",
     "require": {
         "php": ">=5.3.0",
          "tedivm/jshrink": "~1.0",

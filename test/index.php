@@ -3,11 +3,11 @@
 <head>
     <meta http-equiv="content-type" content="text/html" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bender Demo</title>
+    <title>Mender Demo</title>
 <?php
 
 // Report all PHP errors
-use bender\Bender;
+use mender\Mender;
 
 error_reporting(-1);
 
@@ -16,12 +16,12 @@ ini_set('error_reporting', E_ALL);
 
 require_once "../vendor/autoload.php";
 //require_once "";
-$bender = new Bender();
-$bender->enqueue( "assets/css/bootstrap.css" );
-$bender->enqueue( "assets/css/bootstrap-theme.css" );
-$bender->enqueue( "assets/js/jquery-1.10.2.js" );
-$bender->enqueue( "assets/js/bootstrap.js" );
-echo $bender->output( "cache/stylesheet.css" );
+$mender = new Mender();
+$mender->enqueue( "assets/css/bootstrap.css" );
+$mender->enqueue( "assets/css/bootstrap-theme.css" );
+$mender->enqueue( "assets/js/jquery-1.10.2.js" );
+$mender->enqueue( "assets/js/bootstrap.js" );
+echo $mender->output( "cache/stylesheet.css" );
 ?>
 </head>
 
@@ -32,14 +32,14 @@ echo $bender->output( "cache/stylesheet.css" );
         <div class="jumbotron">
             <div class="container">
                 <h1>Hello, world!</h1>
-                <p>This is a Bender demo</p>
-                <p><a class="btn btn-primary btn-lg" href="http://www.esiteq.com/projects/bender/">Learn more &raquo;</a></p>
+                <p>This is a Mender demo</p>
+                <p><a class="btn btn-primary btn-lg" href="http://www.esiteq.com/projects/mender/">Learn more &raquo;</a></p>
             </div>
         </div>
     </div>
 </div>
 <?php
-echo $bender->output( "cache/javascript.js" );
+echo $mender->output( "cache/javascript.js" );
 ?>
 </body>
 </html>
