@@ -1,6 +1,7 @@
 ###Bender
 
 Hey, I forked Bender to make it compatible with Composer! :D
+I'll refactor this to be PSR-something compatible later. For now have fun combining your js and css with gross global namespace classes.
 
 Bender is a class that does a simple but very useful thing: it combines your CSS / Javascripts into one file (one for CSS and one for Javascript),
 then minimizes these files on the fly. It makes your site load faster due to reduced number of HTTP requests. It also reduces server load and traffic.
