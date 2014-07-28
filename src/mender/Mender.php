@@ -26,9 +26,9 @@ class Mender
 
     public function __construct($config = array())
     {
-        $this->ttl = $config['ttl'] ?: 0;
-        $this->cssmin  = $config['cssmin'] ?: 'cssmin';
-        $this->jsmin = $config['jsmin'] ?: 'packer';
+        $this->ttl = isset($config['ttl']) ? $config['ttl'] : 0;
+        $this->cssmin  = isset($config['cssmin']) ? $config['cssmin'] : 'cssmin';
+        $this->jsmin = isset($config['jsmin']) ? $config['jsmin'] : 'packer';
         $this->root_dir = defined( 'ROOT_DIR' ) ? ROOT_DIR : $_SERVER['DOCUMENT_ROOT'];
     }
     // Enqueue CSS or Javascript
