@@ -9,7 +9,7 @@
 use mender\Mender;
 require_once "../vendor/autoload.php";
 $mender = new Mender(array(
-        'path' => '',
+        'path' => 'other',
         'fileClient' => new \themallen\mile\Mile('other')
     ));
 

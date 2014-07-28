@@ -34,8 +34,10 @@ class Mender
         $this->jsmin = isset($config['jsmin']) ? $config['jsmin'] : 'packer';
         $this->rootDir = defined( 'ROOT_DIR' ) ? ROOT_DIR : $_SERVER['DOCUMENT_ROOT'];
         $this->path = isset($config['path']) ? $config['path'] : '';
-        $this->rootDir.="/{$this->path}";
-        $this->fileClient = isset($config['client']) ? $config['client'] : new BasicFileClient();
+        if(!empty($this->path)){
+            $this->rootDir.="/{$this->path}";
+        }
+        $this->fileClient = isset($config['fileClient']) ? $config['fileClient'] : new BasicFileClient();
     }
     // Enqueue CSS or Javascript
     public function enqueue( $filepath )
@@ -163,7 +165,7 @@ class Mender
         $last = 0;
         foreach ( $files as $file )
         {
-            if ( ( $_time = filemtime( "{$path}/{$file}" ) ) > $last )
+            if ( ( $_time = @filemtime( "{$path}/{$file}" ) ) > $last )
                 $last = $_time;
         }
         if ( filemtime( $outfile ) < $last )

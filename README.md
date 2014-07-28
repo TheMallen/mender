@@ -14,6 +14,7 @@ Original Project description, instructions and updates: http://www.esiteq.com/pr
 Monday July 28th, 2014
 - Refactored code to make use of a `fileClient`, including a basic one which wraps the global functions.
 	- This allows you to make use of [Mile](https://github.com/TheMallen/Mile) or any other library you want, as long as an interface with `put()` and `get()` methods is presented.
+- If you are using the basic fileclient you will need to have files ready for the compiled js and css to be written to.
 
 Friday, July 25th, 2014
 - Pretty big refactor to make it a proper composer package.
@@ -44,7 +45,7 @@ When instantiating a Mender instance, one passes a configuration array. this arr
 - ttl : time to live for compiled css/js in seconds. -1 is never recompile, 0 is always recompile.
 - jsmin : the name of the module to use for minimizing js.
 - cssmin : the name of the module to use for minimizing css.
-- rootDir : the root path (in which the module will create a cache folder to store it's output)
+- path : the path to your app from the server root.
 - fileClient : an instance of an object which complies with the fileClient interface.
 
 It's possible that future versions will change this configuration array significantly! For example I am currently considering replacing jsmin and cssmin with instances of an interface similar to fileClient. Alternatively I might move into a more functional style and have cssmin, jsmin, and fileClient all replaced with function arguments.
