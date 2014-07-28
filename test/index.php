@@ -29,7 +29,7 @@ echo $mender->output( "cache/stylesheet.css" );
             <div class="container">
                 <h1>Hello, world!</h1>
                 <p>This is a Mender demo</p>
-                <p><a class="btn btn-primary btn-lg" href="http://www.esiteq.com/projects/mender/">Learn more &raquo;</a></p>
+                <p><a class="btn btn-primary btn-lg" href="https://github.com/TheMallen/Mender">Learn more &raquo;</a></p>
             </div>
         </div>
     </div>

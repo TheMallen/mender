@@ -20,6 +20,7 @@ class Mender
     public $ttl;
     // Project's root dir
     public $rootDir;
+    public $path;
 
     private $versionKey = 'v';
     protected $javascript = array();
@@ -32,7 +33,8 @@ class Mender
         $this->cssmin  = isset($config['cssmin']) ? $config['cssmin'] : 'cssmin';
         $this->jsmin = isset($config['jsmin']) ? $config['jsmin'] : 'packer';
         $this->rootDir = defined( 'ROOT_DIR' ) ? ROOT_DIR : $_SERVER['DOCUMENT_ROOT'];
-        $this->rootDir.= isset($config['path']) ? $config['path'] : '';
+        $this->path = isset($config['path']) ? $config['path'] : '';
+        $this->rootDir.="/{$this->path}";
         $this->fileClient = isset($config['client']) ? $config['client'] : new BasicFileClient();
     }
     // Enqueue CSS or Javascript
@@ -161,7 +163,7 @@ class Mender
         $last = 0;
         foreach ( $files as $file )
         {
-            if ( ( $_time = filemtime( $path . "/" . $file ) ) > $last )
+            if ( ( $_time = filemtime( "{$path}/{$file}" ) ) > $last )
                 $last = $_time;
         }
         if ( filemtime( $outfile ) < $last )
@@ -180,7 +182,7 @@ class Mender
      */
     protected function get_src( $output )
     {
-        return '/' . $output . '?' . $this->versionKey . '=' . filemtime( $this->rootDir() . "/" . $output );
+        return "{$this->path}/{$output}?{$this->versionKey}=".filemtime("{$this->rootDir()}/{$output}");
     }
 
 }
