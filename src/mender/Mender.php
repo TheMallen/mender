@@ -30,6 +30,7 @@ class Mender
         $this->cssmin  = isset($config['cssmin']) ? $config['cssmin'] : 'cssmin';
         $this->jsmin = isset($config['jsmin']) ? $config['jsmin'] : 'packer';
         $this->root_dir = defined( 'ROOT_DIR' ) ? ROOT_DIR : $_SERVER['DOCUMENT_ROOT'];
+        $this->root_dir.= isset($config['path']) ? $config['path'] : '';
     }
     // Enqueue CSS or Javascript
     public function enqueue( $filepath )
@@ -176,8 +177,7 @@ class Mender
      */
     protected function get_src( $output )
     {
-        $path = $this->root_dir();
-        return '/' . $output . '?' . $this->version_key . '=' . filemtime( $path . "/" . $output );
+        return '/' . $output . '?' . $this->version_key . '=' . filemtime( $this->root_dir() . "/" . $output );
     }
 
 }
