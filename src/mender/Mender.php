@@ -19,9 +19,9 @@ class Mender
     // Packed file time to live in sec (-1 = never recompile, 0 = always recompile, default: 3600)
     public $ttl;
     // Project's root dir
-    public $root_dir;
+    public $rootDir;
 
-    private $version_key = 'v';
+    private $versionKey = 'v';
     protected $javascript = array();
     protected $stylesheets = array();
     protected $fileClient;
@@ -31,8 +31,8 @@ class Mender
         $this->ttl = isset($config['ttl']) ? $config['ttl'] : 3600;
         $this->cssmin  = isset($config['cssmin']) ? $config['cssmin'] : 'cssmin';
         $this->jsmin = isset($config['jsmin']) ? $config['jsmin'] : 'packer';
-        $this->root_dir = defined( 'ROOT_DIR' ) ? ROOT_DIR : $_SERVER['DOCUMENT_ROOT'];
-        $this->root_dir.= isset($config['path']) ? $config['path'] : '';
+        $this->rootDir = defined( 'ROOT_DIR' ) ? ROOT_DIR : $_SERVER['DOCUMENT_ROOT'];
+        $this->rootDir.= isset($config['path']) ? $config['path'] : '';
         $this->fileClient = isset($config['client']) ? $config['client'] : new BasicFileClient();
     }
     // Enqueue CSS or Javascript
@@ -58,7 +58,7 @@ class Mender
     // Minify CSS / Javascripts and write output
     protected function minify( $scripts, $ext, $output )
     {
-        $path = $this->root_dir();
+        $path = $this->rootDir();
         $outfile = "{$path}/{$output}";
         if ( file_exists( $outfile ) )
         {
@@ -122,14 +122,14 @@ class Mender
         }
     }
     // Get root dir
-    protected function root_dir()
+    protected function rootDir()
     {
-        return $this->root_dir;
+        return $this->rootDir;
     }
     // Join array of files into a string
     protected function join_files( $files )
     {
-        $path = $this->root_dir();
+        $path = $this->rootDir();
         if ( !is_array( $files ) )
         {
             return "";
@@ -151,7 +151,7 @@ class Mender
      */
     protected function check_recombine( $output, $files )
     {
-        $path = $this->root_dir();
+        $path = $this->rootDir();
         $outfile = "{$path}/{$output}";
         if ( !file_exists( $outfile ) || !is_array( $files ) )
         {
@@ -180,7 +180,7 @@ class Mender
      */
     protected function get_src( $output )
     {
-        return '/' . $output . '?' . $this->version_key . '=' . filemtime( $this->root_dir() . "/" . $output );
+        return '/' . $output . '?' . $this->versionKey . '=' . filemtime( $this->rootDir() . "/" . $output );
     }
 
 }

@@ -44,7 +44,7 @@ When instantiating a Mender instance, one passes a configuration array. this arr
 - ttl : time to live for compiled css/js in seconds. -1 is never recompile, 0 is always recompile.
 - jsmin : the name of the module to use for minimizing js.
 - cssmin : the name of the module to use for minimizing css.
-- root_dir : the root path (in which the module will create a cache folder to store it's output)
+- rootDir : the root path (in which the module will create a cache folder to store it's output)
 - fileClient : an instance of an object which complies with the fileClient interface.
 
 It's possible that future versions will change this configuration array significantly! For example I am currently considering replacing jsmin and cssmin with instances of an interface similar to fileClient. Alternatively I might move into a more functional style and have cssmin, jsmin, and fileClient all replaced with function arguments.
