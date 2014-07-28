@@ -38,3 +38,16 @@ Friday, November 1, 2013
 
 To take a look at a working example, just navigate to the test folder and run `php -S localhost:8000`, open a web browser, and navigate to `localhost:8000`.
 You should be able to view the compressed source and whatnot in your browser debug tools.
+
+#### Configuration
+When instantiating a Mender instance, one passes a configuration array. this array can contain the following keys:
+- ttl : time to live for compiled css/js in seconds. -1 is never recompile, 0 is always recompile.
+- jsmin : the name of the module to use for minimizing js.
+- cssmin : the name of the module to use for minimizing css.
+- root_dir : the root path (in which the module will create a cache folder to store it's output)
+- fileClient : an instance of an object which complies with the fileClient interface.
+
+It's possible that future versions will change this configuration array significantly! For example I am currently considering replacing jsmin and cssmin with instances of an interface similar to fileClient. Alternatively I might move into a more functional style and have cssmin, jsmin, and fileClient all replaced with function arguments.
+
+### Contributing
+If you have cool ideas or just want to give some input, open an issue! I'm quite friendly.
