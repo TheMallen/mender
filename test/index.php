@@ -6,17 +6,13 @@
     <title>Mender Demo</title>
 <?php
 
-// Report all PHP errors
 use mender\Mender;
 
-error_reporting(-1);
-
-// Same as error_reporting(E_ALL);
-ini_set('error_reporting', E_ALL);
-
 require_once "../vendor/autoload.php";
-//require_once "";
-$mender = new Mender();
+$mender = new Mender(array(
+        'path' => '',
+    ));
+
 $mender->enqueue( "assets/css/bootstrap.css" );
 $mender->enqueue( "assets/css/bootstrap-theme.css" );
 $mender->enqueue( "assets/js/jquery-1.10.2.js" );

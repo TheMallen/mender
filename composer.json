@@ -1,11 +1,13 @@
 {
+    "minimum-stability" :"dev",
     "name": "themallen/mender",
     "description": "Mender is a css/js minifier and combiner.",
     "require": {
         "php": ">=5.3.0",
          "tedivm/jshrink": "~1.0",
          "meenie/javascript-packer": "dev-master",
-         "natxet/CssMin": "dev-master"
+         "natxet/CssMin": "dev-master",
+         "themallen/mile": "dev-master"
     },
     "autoload" : {
 		"classmap": ["src/"]

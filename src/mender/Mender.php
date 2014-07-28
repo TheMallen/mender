@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Alex Raven
+ * @author Alex Raven, TheMallen
  * @company ESITEQ
  * @website http://www.esiteq.com/
  * @email bugrov at gmail.com
@@ -9,6 +9,7 @@
  * improved by Rolland (rolland at alterego.biz.ua)
  */
 namespace mender;
+
 class Mender
 {
     // CSS minifier
@@ -19,18 +20,20 @@ class Mender
     public $ttl;
     // Project's root dir
     public $root_dir;
-    // Constructor
+
     private $version_key = 'v';
     protected $javascript = array();
     protected $stylesheets = array();
+    protected $fileClient;
 
     public function __construct($config = array())
     {
-        $this->ttl = isset($config['ttl']) ? $config['ttl'] : 0;
+        $this->ttl = isset($config['ttl']) ? $config['ttl'] : 3600;
         $this->cssmin  = isset($config['cssmin']) ? $config['cssmin'] : 'cssmin';
         $this->jsmin = isset($config['jsmin']) ? $config['jsmin'] : 'packer';
         $this->root_dir = defined( 'ROOT_DIR' ) ? ROOT_DIR : $_SERVER['DOCUMENT_ROOT'];
         $this->root_dir.= isset($config['path']) ? $config['path'] : '';
+        $this->fileClient = isset($config['client']) ? $config['client'] : new BasicFileClient();
     }
     // Enqueue CSS or Javascript
     public function enqueue( $filepath )
@@ -98,7 +101,7 @@ class Mender
                 }
                 break;
         }
-        file_put_contents( $outfile, $packed );
+        $this->fileClient->put($outfile,$packed);
     }
     // Print output for CSS or Javascript
     public function output( $output )
@@ -134,7 +137,7 @@ class Mender
         $c = "";
         foreach ( $files as $file )
         {
-            $c .= file_get_contents( "{$path}/{$file}" );
+            $c .= $this->fileClient->get( "{$path}/{$file}" );
         }
         return $c;
     }
